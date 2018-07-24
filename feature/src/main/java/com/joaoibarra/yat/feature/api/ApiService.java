@@ -13,8 +13,8 @@ public interface ApiService {
     Observable<ProjectListResponse> getProjectList();
 
     @GET("projects/{id}.json")
-    Observable<ProjectListResponse> getProject(@Path("id") int projectId);
+    Observable<ProjectListResponse> getProject(@Path("id") String projectId);
 
     @GET("projects/{id}/tasks.json")
-    Observable<TaskListResponse> getTasksFromProject(@Path("id") int projectId);
+    Observable<TaskListResponse> getTasksFromProject(@Path("id") String projectId);
 }

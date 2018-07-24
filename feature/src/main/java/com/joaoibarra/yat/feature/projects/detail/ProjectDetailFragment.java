@@ -1,8 +1,6 @@
-package com.joaoibarra.yat.feature.projects;
+package com.joaoibarra.yat.feature.projects.detail;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -17,10 +15,9 @@ import android.widget.ProgressBar;
 import com.joaoibarra.yat.feature.Constants;
 import com.joaoibarra.yat.feature.R;
 import com.joaoibarra.yat.feature.R2;
-import com.joaoibarra.yat.feature.api.ApiService;
 import com.joaoibarra.yat.feature.base.BaseApplication;
 import com.joaoibarra.yat.feature.models.Project;
-import com.joaoibarra.yat.feature.projects.detail.ProjectDetailActivity;
+import com.joaoibarra.yat.feature.models.ToDoItem;
 
 import java.util.List;
 
@@ -30,10 +27,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class ProjectListFragment extends Fragment implements ProjectContract.View {
+public class ProjectDetailFragment extends Fragment implements ProjectDetailContract.View{
 
-    @BindView(R2.id.rv_project_list)
-    RecyclerView rvProjectList;
+    @BindView(R2.id.rv_task_list)
+    RecyclerView rvTaskList;
 
     @BindView(R2.id.progress_bar)
     ProgressBar progressBar;
@@ -44,29 +41,28 @@ public class ProjectListFragment extends Fragment implements ProjectContract.Vie
     Unbinder unbinder;
 
     @Inject
-    ProjectListPresenter presenter;
+    ProjectDetailPresenter presenter;
 
-    private ProjectListAdapter projectListAdapter;
+    Project project;
 
-    @Inject
-    ApiService apiService;
+    private TaskListAdapter taskListAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((BaseApplication) getActivity().getApplication())
+        project = getActivity().getIntent().getParcelableExtra(Constants.PROJECT_DETAIL);
+        ((BaseApplication)getActivity().getApplication())
                 .getAppComponent()
-                .newProjectComponent(new ProjectModule(this))
+                .newProjectDetailComponent(new ProjectDetailModule(this))
                 .inject(this);
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_project_list, container, false);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_project_detail, container, false);
         unbinder = ButterKnife.bind(this, view);
-
         return view;
     }
 
@@ -76,34 +72,21 @@ public class ProjectListFragment extends Fragment implements ProjectContract.Vie
         presenter.init();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
 
     @Override
     public void initView() {
-        projectListAdapter = new ProjectListAdapter(getContext(), this);
+        taskListAdapter = new TaskListAdapter(getContext(), this);
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        rvProjectList.setLayoutManager(llm);
-        rvProjectList.setAdapter(projectListAdapter);
-        presenter.fetchProjects();
+        rvTaskList.setLayoutManager(llm);
+        rvTaskList.setAdapter(taskListAdapter);
+        presenter.fetchTasks(project.getId());
     }
 
     @Override
-    public void populateData(List<Project> projectList) {
-
-        projectListAdapter.addAll(projectList);
+    public void populateData(List<ToDoItem> toDoItemList) {
+        taskListAdapter.addAll(toDoItemList);
         hideLoading();
-    }
-
-    @Override
-    public void onProjectItemSelected(Project project) {
-        Intent intent = new Intent(getActivity(), ProjectDetailActivity.class);
-        intent.putExtra(Constants.PROJECT_DETAIL, project);
-        startActivity(intent);
     }
 
     @Override
@@ -114,7 +97,7 @@ public class ProjectListFragment extends Fragment implements ProjectContract.Vie
 
     @Override
     public void showLoading() {
-        rvProjectList.setVisibility(View.GONE);
+        rvTaskList.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
         tvProgressBar.setVisibility(View.VISIBLE);
     }
@@ -123,6 +106,6 @@ public class ProjectListFragment extends Fragment implements ProjectContract.Vie
     public void hideLoading() {
         progressBar.setVisibility(View.GONE);
         tvProgressBar.setVisibility(View.GONE);
-        rvProjectList.setVisibility(View.VISIBLE);
+        rvTaskList.setVisibility(View.VISIBLE);
     }
 }
