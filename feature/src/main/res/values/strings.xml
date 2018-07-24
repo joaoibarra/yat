@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Ibarra Project</string>
+    <string name="loading_projects">Please wait, while we fetch projects</string>
+    <string name="error_message">ERRORRRRR!!!!</string>
+</resources>
