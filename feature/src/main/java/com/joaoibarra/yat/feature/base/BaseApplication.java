@@ -2,8 +2,6 @@ package com.joaoibarra.yat.feature.base;
 
 import android.app.Application;
 
-import com.joaoibarra.yat.feature.AppModule;
-
 public class BaseApplication extends Application {
     private AppComponent appComponent;
 

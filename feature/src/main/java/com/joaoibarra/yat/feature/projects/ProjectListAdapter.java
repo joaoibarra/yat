@@ -85,7 +85,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
             requestOptions.fitCenter();
             Glide.with(context)
                     .asDrawable()
-                    .apply(requestOptions)
+                    .apply(RequestOptions.circleCropTransform())
                     .load(project.getLogo())
                     .into(ivProjectLogo);
             itemView.setOnClickListener(v -> projectView.onProjectItemSelected(project));

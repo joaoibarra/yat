@@ -1,6 +1,4 @@
-package com.joaoibarra.yat.feature;
-
-import com.joaoibarra.yat.feature.base.BaseApplication;
+package com.joaoibarra.yat.feature.base;
 
 import javax.inject.Singleton;
 
