@@ -3,17 +3,27 @@
 
     <item
         android:id="@+id/navigation_tasks"
-        android:icon="@android:drawable/ic_menu_view"
-        android:title="@string/title_tasks" />
+        android:icon="@drawable/ic_calendar_check_white_48dp"
+        android:title="Tasks"/>
 
     <item
         android:id="@+id/navigation_overview"
-        android:icon="@android:drawable/ic_menu_view"
-        android:title="@string/title_overview" />
+        android:icon="@drawable/ic_file_tree_white_48dp"
+        android:title="Overview"/>
 
     <item
-        android:id="@+id/navigation_config"
-        android:icon="@android:drawable/ic_menu_view"
-        android:title="@string/title_config" />
+        android:id="@+id/navigation_messages"
+        android:icon="@drawable/ic_comment_outline_white_48dp"
+        android:title="Messages"/>
+
+    <item
+        android:id="@+id/navigation_milestones"
+        android:icon="@drawable/ic_flag_outline_white_48dp"
+        android:title="Milestones"/>
+
+    <item
+        android:id="@+id/navigation_more"
+        android:icon="@drawable/ic_playlist_plus_white_48dp"
+        android:title="More"/>
 
 </menu>

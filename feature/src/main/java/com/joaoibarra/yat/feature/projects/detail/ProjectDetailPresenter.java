@@ -26,6 +26,7 @@ public class ProjectDetailPresenter implements ProjectDetailContract.Presenter {
     public void getProject(String projectId) {
         isUpdating = true;
         apiService.getTasksFromProject(projectId).observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(__ -> projectDetailView.showLoading())
                 .doOnTerminate(() -> isUpdating = false)
                 .map(TaskListResponse::getTodoItems)
                 .subscribe(projectDetailView::populateData, projectDetailView::onError);
@@ -35,6 +36,7 @@ public class ProjectDetailPresenter implements ProjectDetailContract.Presenter {
     public void fetchTasks(String projectId) {
         isUpdating = true;
         apiService.getTasksFromProject(projectId).observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(__ -> projectDetailView.showLoading())
                 .doOnTerminate(() -> isUpdating = false)
                 .map(TaskListResponse::getTodoItems)
                 .subscribe(projectDetailView::populateData, projectDetailView::onError);
