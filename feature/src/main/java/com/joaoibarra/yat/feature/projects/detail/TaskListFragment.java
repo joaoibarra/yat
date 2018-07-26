@@ -1,5 +1,6 @@
 package com.joaoibarra.yat.feature.projects.detail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -13,14 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ProgressBar;
 
-import com.joaoibarra.yat.feature.Constants;
 import com.joaoibarra.yat.feature.R;
 import com.joaoibarra.yat.feature.R2;
 import com.joaoibarra.yat.feature.base.BaseApplication;
+import com.joaoibarra.yat.feature.base.Constants;
 import com.joaoibarra.yat.feature.models.Project;
 import com.joaoibarra.yat.feature.models.ToDoItem;
+import com.joaoibarra.yat.feature.tasks.TaskActivity;
 
 import java.util.List;
 
@@ -30,13 +31,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class ProjectDetailFragment extends Fragment implements ProjectDetailContract.View{
+public class TaskListFragment extends Fragment implements ProjectDetailContract.TaskView {
 
     @BindView(R2.id.rv_task_list)
     RecyclerView rvTaskList;
-
-    @BindView(R2.id.progress_bar)
-    ProgressBar progressBar;
 
     @BindView(R2.id.tv_progres_bar)
     AppCompatTextView tvProgressBar;
@@ -47,7 +45,7 @@ public class ProjectDetailFragment extends Fragment implements ProjectDetailCont
     Unbinder unbinder;
 
     @Inject
-    ProjectDetailPresenter presenter;
+    TaskListPresenter presenter;
 
     Project project;
 
@@ -96,6 +94,13 @@ public class ProjectDetailFragment extends Fragment implements ProjectDetailCont
     }
 
     @Override
+    public void onToDoItemSelected(ToDoItem toDoItem) {
+        Intent intent = new Intent(getActivity(), TaskActivity.class);
+        intent.putExtra(Constants.TASK_DETAIL, toDoItem);
+        startActivity(intent);
+    }
+
+    @Override
     public void onError(Throwable throwable) {
         hideLoading();
         Snackbar.make(tvProgressBar, R.string.error_message, Snackbar.LENGTH_LONG).show();
@@ -104,7 +109,6 @@ public class ProjectDetailFragment extends Fragment implements ProjectDetailCont
     @Override
     public void showLoading() {
         rvTaskList.setVisibility(View.GONE);
-        progressBar.setVisibility(View.GONE);
         tvProgressBar.setVisibility(View.VISIBLE);
         fabAnimationProgress.setVisibility(View.VISIBLE);
         Animation pulse = AnimationUtils.loadAnimation(getContext(), R.anim.pulse);
@@ -113,7 +117,6 @@ public class ProjectDetailFragment extends Fragment implements ProjectDetailCont
 
     @Override
     public void hideLoading() {
-        progressBar.setVisibility(View.GONE);
         tvProgressBar.setVisibility(View.GONE);
         fabAnimationProgress.clearAnimation();
         fabAnimationProgress.setVisibility(View.GONE);

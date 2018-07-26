@@ -7,9 +7,8 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="com.joaoibarra.yat.feature.projects.ProjectListFragment"
+        android:name="com.joaoibarra.yat.feature.tasks.TaskFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".projects.ProjectListActivity" />
-
+        tools:context=".tasks.TaskActivity" />
 </FrameLayout>

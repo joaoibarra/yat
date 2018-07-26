@@ -12,9 +12,6 @@ public interface ApiService {
     @GET("projects.json")
     Observable<ProjectListResponse> getProjectList();
 
-    @GET("projects/{id}.json")
-    Observable<ProjectListResponse> getProject(@Path("id") String projectId);
-
     @GET("projects/{id}/tasks.json")
     Observable<TaskListResponse> getTasksFromProject(@Path("id") String projectId);
 }

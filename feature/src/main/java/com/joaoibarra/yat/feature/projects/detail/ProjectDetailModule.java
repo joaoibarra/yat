@@ -8,15 +8,15 @@ import dagger.Provides;
 
 @Module
 public class ProjectDetailModule {
-    private final ProjectDetailContract.View projectDetailView;
+    private final ProjectDetailContract.TaskView projectDetailTaskView;
 
-    public ProjectDetailModule(ProjectDetailContract.View projectDetailView) {
-        this.projectDetailView = projectDetailView;
+    public ProjectDetailModule(ProjectDetailContract.TaskView projectDetailTaskView) {
+        this.projectDetailTaskView = projectDetailTaskView;
     }
 
     @Provides
     @ProjectScope
-    ProjectDetailPresenter provideProjectDetailPresenter(ApiService apiService) {
-        return new ProjectDetailPresenter(projectDetailView, apiService);
+    TaskListPresenter provideTaskListPresenter(ApiService apiService) {
+        return new TaskListPresenter(projectDetailTaskView, apiService);
     }
 }

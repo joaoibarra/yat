@@ -30,13 +30,13 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
     private Context context;
     private List<ToDoItem> toDoItemList;
     private LayoutInflater layoutInflater;
-    private ProjectDetailContract.View projectDetailView;
+    private ProjectDetailContract.TaskView projectDetailTaskView;
 
-    public TaskListAdapter(Context context, ProjectDetailContract.View projectDetailView) {
+    public TaskListAdapter(Context context, ProjectDetailContract.TaskView projectDetailTaskView) {
         this.context = context;
         toDoItemList = new ArrayList<>();
         layoutInflater = LayoutInflater.from(context);
-        this.projectDetailView = projectDetailView;
+        this.projectDetailTaskView = projectDetailTaskView;
     }
 
     @Override
@@ -96,26 +96,14 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
         void bindViews(ToDoItem toDoItem) {
             tvTaskContent.setText(toDoItem.getContent());
             tvTaskListName.setText(toDoItem.getTodoListName());
-            tvDueDate.setText(toDoItem.getDueDate());
+            tvDueDate.setText(toDoItem.getFormatDueDate());
             Glide.with(context)
                     .asDrawable()
                     .apply(RequestOptions.circleCropTransform())
                     .load(toDoItem.getCreatorAvatarUrl())
                     .into(ivUserLogo);
-            List<PieEntry> entries = new ArrayList<>();
 
-            float progress = Float.valueOf(toDoItem.getProgress());
-
-            entries.add(new PieEntry(progress));
-            entries.add(new PieEntry(100f-progress));
-
-
-            PieDataSet set = new PieDataSet(entries, null);
-            set.setDrawValues(false);
-
-            set.setColors(new int[]{ContextCompat.getColor(context, R.color.colorAccent),ContextCompat.getColor(context, R.color.gray)});
-
-            PieData data = new PieData(set);
+            PieData data = new PieData(getPieDataSet(toDoItem.getProgress()));
             pieChart.setData(data);
             pieChart.getLegend().setEnabled(false);
             pieChart.getDescription().setEnabled(false);
@@ -123,6 +111,26 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
             pieChart.animateY(1000);
             pieChart.setTouchEnabled(false);
             pieChart.invalidate();
+
+            itemView.setOnClickListener(v -> projectDetailTaskView.onToDoItemSelected(toDoItem));
+        }
+
+        private List<PieEntry> getEntries(String progressValue){
+            List<PieEntry> entries = new ArrayList<>();
+
+            float progress = Float.valueOf(progressValue);
+
+            entries.add(new PieEntry(progress));
+            entries.add(new PieEntry(100f-progress));
+            return entries;
+        }
+
+        private PieDataSet getPieDataSet(String progressValue){
+            PieDataSet set = new PieDataSet(getEntries(progressValue), null);
+            set.setDrawValues(false);
+
+            set.setColors(new int[]{ContextCompat.getColor(context, com.joaoibarra.yat.R.color.colorAccent),ContextCompat.getColor(context, com.joaoibarra.yat.R.color.gray)});
+            return set;
         }
     }
 }

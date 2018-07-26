@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">Ibarra Project</string>
-    <string name="loading_projects">Please wait, while we fetch projects</string>
+    <string name="loading_projects">Loading data</string>
     <string name="error_message">ERRORRRRR!!!!</string>
 
     <string name="title_tasks">Tasks</string>
     <string name="title_overview">Overview</string>
     <string name="title_config">More</string>
+    <string name="title_task_detail">Task Detail</string>
 </resources>

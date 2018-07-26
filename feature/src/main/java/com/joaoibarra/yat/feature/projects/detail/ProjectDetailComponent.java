@@ -7,5 +7,5 @@ import dagger.Subcomponent;
 @ProjectScope
 @Subcomponent(modules = {ProjectDetailModule.class})
 public interface ProjectDetailComponent {
-    void inject(ProjectDetailFragment projectDetailFragment);
+    void inject(TaskListFragment taskListFragment);
 }

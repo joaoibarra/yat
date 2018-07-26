@@ -3,7 +3,7 @@ package com.joaoibarra.yat.feature.api;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.joaoibarra.yat.feature.Constants;
+import com.joaoibarra.yat.feature.base.Constants;
 
 import java.util.concurrent.TimeUnit;
 
@@ -67,7 +67,7 @@ public class ApiModule {
 
     private static Headers getHeader() {
         Headers.Builder builder = new Headers.Builder();
-        builder.add("Authorization", "Basic eWF0QHRyaXBsZXNwaW4uY29tOnlhdHlhdHlhdDI3");
+        builder.add("Authorization", Constants.BASIC_KEY);
         builder.add("Content-Type", "application/json");
         return builder.build();
     }

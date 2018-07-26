@@ -40,17 +40,17 @@ public class ProjectDetailActivity extends BaseActivity {
 
     public void setFragmentByMenu(MenuItem menuItemu) {
         if(menuItemu.getItemId() == R.id.navigation_tasks) {
-            setFragment(new ProjectDetailFragment());
+            setFragment(new TaskListFragment());
         }else if(menuItemu.getItemId() == R.id.navigation_overview) {
-            setFragment(new ProjectDetailFragment());
+            setFragment(new TaskListFragment());
         }else if(menuItemu.getItemId() == R.id.navigation_messages) {
-            setFragment(new ProjectDetailFragment());
+            setFragment(new TaskListFragment());
         }else if(menuItemu.getItemId() == R.id.navigation_milestones) {
-            setFragment(new ProjectDetailFragment());
+            setFragment(new TaskListFragment());
         }else if(menuItemu.getItemId() == R.id.navigation_more) {
-            setFragment(new ProjectDetailFragment());
+            setFragment(new TaskListFragment());
         }else{
-            setFragment(new ProjectDetailFragment());
+            setFragment(new TaskListFragment());
         }
     }
 

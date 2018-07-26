@@ -29,4 +29,5 @@
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
         app:menu="@menu/navigation"/>
+
 </android.support.constraint.ConstraintLayout>
