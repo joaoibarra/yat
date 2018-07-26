@@ -7,7 +7,7 @@ import com.joaoibarra.yat.feature.models.ToDoItem;
 import java.util.List;
 
 public class TaskContract {
-    interface View {
+    public interface View {
 
         void initView();
 
@@ -20,7 +20,7 @@ public class TaskContract {
         void hideLoading();
     }
 
-    interface Presenter {
+    public interface Presenter {
 
         void init();
 

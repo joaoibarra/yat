@@ -1,7 +1,5 @@
 package com.joaoibarra.yat.feature.tasks;
 
-import android.support.v4.content.ContextCompat;
-
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.joaoibarra.yat.feature.api.ApiService;

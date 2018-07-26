@@ -2,15 +2,14 @@ package com.joaoibarra.yat.feature;
 
 import com.joaoibarra.yat.feature.api.ApiService;
 import com.joaoibarra.yat.feature.mock.api.MockApiService;
-import com.joaoibarra.yat.feature.projects.ProjectContract;
-import com.joaoibarra.yat.feature.projects.ProjectListPresenter;
+import com.joaoibarra.yat.feature.models.ToDoItem;
+import com.joaoibarra.yat.feature.tasks.TaskContract;
+import com.joaoibarra.yat.feature.tasks.TaskPresenter;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -23,16 +22,14 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.internal.schedulers.ExecutorScheduler;
 import io.reactivex.plugins.RxJavaPlugins;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 
-@RunWith(JUnit4.class)
-public class ProjectListPresenterTest {
-
+public class TaskPresenterTest {
     @Mock
-    private ProjectContract.View projectView;
+    private TaskContract.View taskView;
 
     @BeforeClass
-    public static void setupRxSchedulers(){
+    public static void setupRxSchedulers() {
         Scheduler onInit = new Scheduler() {
             @Override
             public Worker createWorker() {
@@ -62,11 +59,13 @@ public class ProjectListPresenterTest {
     }
 
     @Test
-    public void validGetProjectResponseData(){
+    public void validSetTaskData() {
         ApiService apiService = new MockApiService();
-        ProjectContract.Presenter presenter = new ProjectListPresenter(projectView, apiService);
-        presenter.fetchProjects();
+        TaskContract.Presenter taskPresenter = new TaskPresenter(taskView, apiService);
+        ToDoItem toDoItemMock = mock(ToDoItem.class);
+        taskPresenter.fetchTask(toDoItemMock);
 
-        Mockito.verify(projectView, Mockito.times(1)).populateData(any());
+        Mockito.verify(taskView, Mockito.times(1)).populateData(toDoItemMock);
     }
 }
+

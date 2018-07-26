@@ -4,6 +4,8 @@ import com.joaoibarra.yat.feature.api.ApiService;
 import com.joaoibarra.yat.feature.mock.api.MockApiService;
 import com.joaoibarra.yat.feature.projects.ProjectContract;
 import com.joaoibarra.yat.feature.projects.ProjectListPresenter;
+import com.joaoibarra.yat.feature.projects.detail.ProjectDetailContract;
+import com.joaoibarra.yat.feature.projects.detail.TaskListPresenter;
 
 import org.junit.After;
 import org.junit.Before;
@@ -26,13 +28,12 @@ import io.reactivex.plugins.RxJavaPlugins;
 import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(JUnit4.class)
-public class ProjectListPresenterTest {
-
+public class TaskListPresenterTest {
     @Mock
-    private ProjectContract.View projectView;
+    private ProjectDetailContract.TaskView taskView;
 
     @BeforeClass
-    public static void setupRxSchedulers(){
+    public static void setupRxSchedulers() {
         Scheduler onInit = new Scheduler() {
             @Override
             public Worker createWorker() {
@@ -62,11 +63,11 @@ public class ProjectListPresenterTest {
     }
 
     @Test
-    public void validGetProjectResponseData(){
+    public void validGetTaskResponseData() {
         ApiService apiService = new MockApiService();
-        ProjectContract.Presenter presenter = new ProjectListPresenter(projectView, apiService);
-        presenter.fetchProjects();
+        ProjectDetailContract.Presenter taskPresenter = new TaskListPresenter(taskView, apiService);
+        taskPresenter.fetchTasks("462923");
 
-        Mockito.verify(projectView, Mockito.times(1)).populateData(any());
+        Mockito.verify(taskView, Mockito.times(1)).populateData(any());
     }
 }
