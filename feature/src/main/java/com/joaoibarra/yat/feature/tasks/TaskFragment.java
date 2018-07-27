@@ -59,6 +59,9 @@ public class TaskFragment extends Fragment implements TaskContract.View{
     @BindView(R2.id.tv_task_list_name)
     TextView tvTaskListName;
 
+    @BindView(R2.id.tv_description)
+    TextView tvDescription;
+
     @BindView(R2.id.tv_due_date)
     TextView tvDueDate;
 
@@ -124,7 +127,9 @@ public class TaskFragment extends Fragment implements TaskContract.View{
 
         tvTaskContent.setText(toDoItem.getContent());
         tvTaskListName.setText(toDoItem.getTodoListName());
+        tvDescription.setText(toDoItem.getDescription());
         tvDueDate.setText(toDoItem.getFormatDueDate());
+
         Glide.with(getContext())
                 .asDrawable()
                 .apply(RequestOptions.circleCropTransform())
