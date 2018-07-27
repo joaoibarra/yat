@@ -27,6 +27,7 @@ public class ProjectListPresenter implements ProjectContract.Presenter {
     public void fetchProjects() {
         isUpdating = true;
         apiService.getProjectList().observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe(__ -> projectView.showLoading())
                 .doOnTerminate(() -> isUpdating = false)
                 .map(ProjectListResponse::getProjects)
                 .subscribe(projectView::populateData, projectView::onError);

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_tasks"
+        android:icon="@drawable/ic_calendar_check_white_48dp"
+        android:title="Tasks"/>
+
+    <item
+        android:id="@+id/navigation_overview"
+        android:icon="@drawable/ic_file_tree_white_48dp"
+        android:title="Overview"/>
+
+    <item
+        android:id="@+id/navigation_messages"
+        android:icon="@drawable/ic_comment_outline_white_48dp"
+        android:title="Messages"/>
+
+    <item
+        android:id="@+id/navigation_milestones"
+        android:icon="@drawable/ic_flag_outline_white_48dp"
+        android:title="Milestones"/>
+
+    <item
+        android:id="@+id/navigation_more"
+        android:icon="@drawable/ic_playlist_plus_white_48dp"
+        android:title="More"/>
+
+</menu>

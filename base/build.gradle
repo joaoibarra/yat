@@ -31,6 +31,9 @@ dependencies {
     api 'com.android.support:cardview-v7:27.1.1'
     api 'com.android.support.constraint:constraint-layout:1.1.2'
 
+    //Dagger
+    api 'com.google.dagger:dagger:2.16'
+
     application project(':app')
     feature project(':feature')
 }

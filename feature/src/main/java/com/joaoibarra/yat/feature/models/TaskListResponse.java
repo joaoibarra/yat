@@ -46,6 +46,14 @@ public class TaskListResponse implements Parcelable{
         }
     };
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setTodoItems(List<ToDoItem> todoItems) {
+        this.todoItems = todoItems;
+    }
+
     public String getStatus() {
         return status;
     }

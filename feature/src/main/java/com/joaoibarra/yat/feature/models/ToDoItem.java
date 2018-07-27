@@ -5,6 +5,10 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ToDoItem implements Parcelable{
     private String id;
     private boolean canComplete;
@@ -346,6 +350,18 @@ public class ToDoItem implements Parcelable{
 
     public String getDueDate() {
         return dueDate;
+    }
+
+    public String getFormatDueDate(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat dateFormatToString = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date d = dateFormat.parse(dueDate);
+            return dateFormatToString.format(d);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "No Due Date";
+        }
     }
 
     public String getCreatedOn() {

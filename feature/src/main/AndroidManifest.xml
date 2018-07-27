@@ -30,6 +30,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".projects.detail.ProjectDetailActivity"/>
+        <activity android:name=".tasks.TaskActivity" android:label="@string/title_task_detail"/>
     </application>
 
 </manifest>

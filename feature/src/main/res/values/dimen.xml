@@ -3,6 +3,7 @@
     <dimen name="loading">26sp</dimen>
     <dimen name="margin_text_view">16dp</dimen>
     <dimen name="margin_recyclerview">16dp</dimen>
+    <dimen name="margin_tag">8dp</dimen>
 
     <dimen name="regular_text_view">16dp</dimen>
 </resources>
